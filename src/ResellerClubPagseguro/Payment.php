@@ -1,7 +1,7 @@
 <?php
 namespace ResellerClubPagseguro;
 
-require_once __DIR__.'/../../vendor/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
+require_once __DIR__.'/../../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
 
 /**
  * Class to process Pagseguro payments from ResellerClub
