@@ -1,10 +1,23 @@
 <?php
 namespace ResellerClubPagseguro;
 
-require_once __DIR__.'/../../vendor/pagseguro/source/PagSeguroLibrary/PagSeguroLibrary.php';
+require_once __DIR__.'/../../vendor/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
 
+/**
+ * Class to process Pagseguro payments from ResellerClub
+ *
+ * @package ResellerClubPagseguro
+ * @author Glauber Portella <glauberportella@gmail.com>
+ * @version 0.1
+ */
 class Payment
 {
+	/**
+	 * Generate a payment request url for PagSeguro
+	 *
+	 * @param array $resellerPaymentData ResellerClub transaction information data for payment process
+	 * @return null|string Null on error or payment URL for PagSeguro
+	 */
 	public function createRequestUrl(array $resellerPaymentData)
 	{
 		// Instantiate a new payment request
