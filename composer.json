@@ -1,0 +1,16 @@
+{
+    "name": "glauberportella/resellerclub-pagseguro",
+    "homepage": "https://github.com/glauberportella/resellerclub-pagseguro",
+    "authors": [
+        {
+            "name": "Glauber Portella",
+            "email": "glauberportella@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"": "src/"}
+    },
+    "require": {
+
+    }
+}
