@@ -11,7 +11,7 @@ $PagSeguroConfig['environment'] = Array();
 $PagSeguroConfig['environment']['environment'] = "production";
 
 $PagSeguroConfig['credentials'] = Array();
-$PagSeguroConfig['credentials']['email'] = "uatzup@interestedin.com.br";
+$PagSeguroConfig['credentials']['email'] = "glauberportella@gmail.com";
 $PagSeguroConfig['credentials']['token'] = "8DAEC9E606FC409084D42A125278B756";
 
 $PagSeguroConfig['application'] = Array();

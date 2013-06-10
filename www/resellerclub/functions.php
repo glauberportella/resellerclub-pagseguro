@@ -1,7 +1,7 @@
 <?php
 
 	function generateChecksum($transId,$sellingCurrencyAmount,$accountingCurrencyAmount,$status, $rkey,$key)
-	{
+	{	
 		$str = "$transId|$sellingCurrencyAmount|$accountingCurrencyAmount|$status|$rkey|$key";
         $generatedCheckSum = md5($str);
 		return $generatedCheckSum;
@@ -18,5 +18,5 @@
 			return true ;
 		else
 			return false ;
-	}
+	}	
 ?>
