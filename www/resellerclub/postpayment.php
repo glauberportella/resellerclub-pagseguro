@@ -24,7 +24,7 @@
 		$accountingCurrencyAmount = $_SESSION['accountingcurencyamount'];
 
 
-		$status = $_REQUEST["status"];	 // Transaction status received from your Payment Gateway
+		$status = \ResellerClubPagseguro\Payment::isSuccessTransaction() ? 'Y' : 'N';	 // Transaction status received from your Payment Gateway
 		//This can be either 'Y' or 'N'. A 'Y' signifies that the Transaction went through SUCCESSFULLY and that the amount has been collected.
 		//An 'N' on the other hand, signifies that the Transaction FAILED.
 

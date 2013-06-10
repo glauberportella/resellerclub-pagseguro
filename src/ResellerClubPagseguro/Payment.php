@@ -16,7 +16,8 @@ class Payment
 	 * Generate a payment request url for PagSeguro
 	 *
 	 * @param array $resellerPaymentData ResellerClub transaction information data for payment process
-	 * @return null|string Null on error or payment URL for PagSeguro
+	 * @param array $customerData ResellerClub customer information
+	 * @return boolean|string False on error or payment URL for PagSeguro
 	 */
 	public function createRequestUrl(array $resellerPaymentData, array $customerData)
 	{
@@ -59,8 +60,12 @@ class Payment
 			$url = $paymentRequest->register($credentials);
 			return $url;
 		} catch (\PagSeguroServiceException $e) {
-			echo "<p><strong>ERROR:</strong> " . $e->getMessage() . "</p>";
-			return null;
+			return false;
 		}
+	}
+
+	public static function isSuccessTransaction()
+	{
+		return isset($_GET['transaction_id']) ? true : false;
 	}
 }
