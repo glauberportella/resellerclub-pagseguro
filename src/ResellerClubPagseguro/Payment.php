@@ -68,4 +68,9 @@ class Payment
 	{
 		return isset($_GET['transaction_id']) ? true : false;
 	}
+
+	public static function getTransactionId()
+	{
+		return isset($_GET['transaction_id']) ? $_GET['transaction_id'] : null;
+	}
 }

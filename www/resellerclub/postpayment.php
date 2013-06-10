@@ -27,6 +27,9 @@
 		//This can be either 'Y' or 'N'. A 'Y' signifies that the Transaction went through SUCCESSFULLY and that the amount has been collected.
 		//An 'N' on the other hand, signifies that the Transaction FAILED.
 
+		// Glauber Portella <glauberportella@gmail.com>
+		// 1. se status = Y salvar \ResellerClubPagseguro\Payment::getTransactionId() no banco para futuras referencias na conta pagseguro
+
 		/**HERE YOU HAVE TO VERIFY THAT THE STATUS PASSED FROM YOUR PAYMENT GATEWAY IS VALID.
 		* And it has not been tampered with. The data has not been changed since it can * easily be done with HTTP request.
 		*
