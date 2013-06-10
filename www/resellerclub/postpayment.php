@@ -15,8 +15,7 @@
 <font size=4>
 
 <?php
-		$key = "44q9dn7WCUrLHgi8bPsdiBIlLi6WaHI0"; //replace ur 32 bit secure key , Get your secure key from your Reseller Control panel
-
+		$key = \ResellerClubPagseguro\Config::RESELLERCLUB_KEY; //replace ur 32 bit secure key , Get your secure key from your Reseller Control panel
 
 		$redirectUrl = $_SESSION['redirecturl'];  // redirectUrl received from foundation
 		$transId = $_SESSION['transid'];		 //Pass the same transid which was passsed to your Gateway URL at the beginning of the transaction.
