@@ -41,19 +41,21 @@ class Payment
 
 		if (in_array($resellerPaymentData['transactionType'], array('ResellerPayment', 'CustomerPayment')))
 		{
+			$description = substr($resellerPaymentData['description'], 0, 100);
 
 			if ($resellerPaymentData['invoiceids']) {
-				$paymentRequest->addItem($resellerPaymentData['invoiceids'], $resellerPaymentData['description'], 1, $amount);
+				$paymentRequest->addItem($resellerPaymentData['invoiceids'], $description, 1, $amount);
 			} elseif ($resellerPaymentData['debitnoteids']) {
-				$paymentRequest->addItem($resellerPaymentData['debitnoteids'], $resellerPaymentData['description'], 1, $amount);
+				$paymentRequest->addItem($resellerPaymentData['debitnoteids'], $description, 1, $amount);
 			} else {
-				$paymentRequest->addItem($resellerPaymentData['transid'], $resellerPaymentData['description'], 1, $amount);
+				$paymentRequest->addItem($resellerPaymentData['transid'], $description, 1, $amount);
 			}
 
 		}
 		else
 		{
-			$paymentRequest->addItem($resellerPaymentData['transid'], $resellerPaymentData['description'], 1, $amount);
+			$description = substr('Adição de fundo - '.$customerData['name'], 0, 100);
+			$paymentRequest->addItem($resellerPaymentData['transid'], $description, 1, $amount);
 		}
 
 
