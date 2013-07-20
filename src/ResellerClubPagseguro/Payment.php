@@ -39,7 +39,23 @@ class Payment
 			$amount = number_format($resellerPaymentData['sellingcurrencyamount'], 2, '.', '');
 		}
 
-		$paymentRequest->addItem($resellerPaymentData['invoiceids'], $resellerPaymentData['description'], 1, $amount);
+		if (in_array($resellerPaymentData['transactionType'], array('ResellerPayment', 'CustomerPayment')))
+		{
+
+			if ($resellerPaymentData['invoiceids']) {
+				$paymentRequest->addItem($resellerPaymentData['invoiceids'], $resellerPaymentData['description'], 1, $amount);
+			} elseif ($resellerPaymentData['debitnoteids']) {
+				$paymentRequest->addItem($resellerPaymentData['debitnoteids'], $resellerPaymentData['description'], 1, $amount);
+			} else {
+				$paymentRequest->addItem($resellerPaymentData['transid'], $resellerPaymentData['description'], 1, $amount);
+			}
+
+		}
+		else
+		{
+			$paymentRequest->addItem($resellerPaymentData['transid'], $resellerPaymentData['description'], 1, $amount);
+		}
+
 
 		// Sets a reference code for this payment request, it is useful to identify this payment in future notifications.
 		$paymentRequest->setReference($resellerPaymentData['transid']);
