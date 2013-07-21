@@ -1,6 +1,6 @@
 <?php
 	 session_start();
-	 session_save_path("./"); //path on your server where you are storing session
+	 @session_save_path("./"); //path on your server where you are storing session
 
 
 	//file which has required functions
@@ -41,12 +41,19 @@
 
 		$checksum =generateChecksum($transId,$sellingCurrencyAmount,$accountingCurrencyAmount,$status, $rkey,$key);
 
-		// POST to ResellerClub Server
-		/*$curl = curl_init();
+		// TRY POST to ResellerClub Server
+		// do post eith curl
+		// to it works we need to store session in cookie
+		/*$sessionName = session_name();
+		$strCookie = sprintf('%s=%s; path=/', $sessionName, $_COOKIE[$sessionName]);
+		session_write_close();
+
+		$curl = curl_init();
 
 		curl_setopt( $curl , CURLOPT_URL , $redirectUrl );
 		curl_setopt( $curl , CURLOPT_SSL_VERIFYPEER , false );
 		curl_setopt( $curl , CURLOPT_RETURNTRANSFER , 1 );
+		curl_setopt( $curl , CURLOPT_COOKIE, $strCookie ); 
 		curl_setopt( $curl , CURLOPT_POST , 1 );
 		curl_setopt( $curl , CURLOPT_POSTFIELDS , http_build_query( array(
 				'transid' => $transId,
@@ -54,7 +61,7 @@
 				'rkey' => $rkey,
 				'checksum' => $checksum,
 				'sellingcurrencyamount' => $sellingCurrencyAmount,
-				'accountingcurencyamount' => $accountingCurrencyAmount
+				'accountingcurrencyamount' => $accountingCurrencyAmount
 			) ) );
 
 		$response = curl_exec( $curl );
@@ -67,16 +74,7 @@
 			echo $response;
 		} else {
 			die(sprintf('Post error: [%d] %s', $errno, $error));
-		}
-*/
-			echo "File: postpayment.php<br>";
-			echo "redirecturl: ".$redirectUrl."<br>";
-			echo "List of Variables to send back<br>";
-			echo "transid : ".$transId."<br>";
-			echo "status : ".$status."<br>";
-			echo "rkey : ".$rkey."<br>";
-			echo "checksum : ".$checksum."<br><br>";
-
+		}*/
 ?>
 		<form name="f1" action="<?php echo $redirectUrl;?>">
 			<input type="hidden" name="transid" value="<?php echo $transId;?>">
@@ -86,8 +84,14 @@
 			<input type="hidden" name="sellingamount" value="<?php echo $sellingCurrencyAmount;?>">
 			<input type="hidden" name="accountingamount" value="<?php echo $accountingCurrencyAmount;?>">
 
-			<input type="submit" value="Click here to Continue"><BR>
+			<!-- <input type="submit" value="CLIQUE AQUI PARA TERMINAR A TRANSAÇÃO"><BR> -->
 		</form>
+		<script type="text/javascript">
+		window.onload = function() {
+			var form = document.getElementsByName('f1')[0];
+			form.submit();
+		}
+		</script>
 </font>
 </body>
 </html>
