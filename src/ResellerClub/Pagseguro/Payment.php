@@ -1,8 +1,6 @@
 <?php
 namespace ResellerClub\Pagseguro;
 
-require_once __DIR__.'/../../../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
-
 /**
  * Class to process Pagseguro payments from ResellerClub
  *
@@ -47,7 +45,7 @@ class Payment
 			$amount = number_format($transactionData['sellingcurrencyamount'], 2, '.', '');
 		}
 
-		if (in_array($transactionData['transactionType'], array('ResellerPayment', 'CustomerPayment')))
+		if (in_array($transactionData['transactiontype'], array('ResellerPayment', 'CustomerPayment')))
 		{
 			$description = substr($transactionData['description'], 0, 100);
 
@@ -94,10 +92,12 @@ class Payment
 	 */
 	public function post(array $transaction)
 	{
-		$key = $this->config['RESELLERCLUB_KEY']; //replace ur 32 bit secure key , Get your secure key from your Reseller Control panel
+		$key = $this->config['RESELLERCLUB_KEY'];
 
-		$redirectUrl = $transaction['redirecturl'];	// redirectUrl received from foundation
-		$transId = $transaction['transid'];			// Pass the same transid which was passsed to your Gateway URL at the beginning of the transaction.
+		// redirectUrl received from foundation
+		$redirectUrl = $transaction['redirecturl'];
+		// Pass the same transid which was passsed to your Gateway URL at the beginning of the transaction.
+		$transId = $transaction['transid'];
 		$sellingCurrencyAmount = $transaction['sellingcurrencyamount'];
 		$accountingCurrencyAmount = $transaction['accountingcurrencyamount'];
 		$status = $transaction['pagseguroTransactionStatus'] === \ResellerClub\Pagseguro\Notification::PAID ? 'Y' : 'N';

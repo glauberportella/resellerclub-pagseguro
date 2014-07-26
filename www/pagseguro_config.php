@@ -7,7 +7,7 @@ $pagseguro_config = array(
 	// Your ResellerClub KEY for Payment Gateway and other parameters, change to fit your needs
 	'RESELLERCLUB_KEY' 		=> 'AhBNDrHBeIcHqcZHe3usTBvvnrfXKNKC',
 	
-	'PAGSEGURO_RETURN_URL' 	=> 'http://localhost:8000/pagseguro_return.php',
+	'PAGSEGURO_RETURN_URL' 	=> 'http://pagamento.desenvolve4web.com/pagseguro_return.php',
 	'PAGSEGURO_EMAIL' 		=> 'host@desenvolve4web.com',
 	'PAGSEGURO_TOKEN' 		=> '8DAEC9E606FC409084D42A125278B756',
 

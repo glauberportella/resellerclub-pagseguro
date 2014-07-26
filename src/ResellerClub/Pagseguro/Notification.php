@@ -79,13 +79,7 @@ class Notification
 	protected function paid(\PagSeguroTransaction $transaction)
 	{
 		$db = \ResellerClub\Pagseguro\Database::instance($this->config);
-		$con = $db->getConnection();
-		
-		$sql = 'SELECT * FROM '.$this->config['TABLENAME'].' WHERE pagseguroTransactionId = ?';
-		
-		$stmt = $con->prepare($sql);
-		$stmt->execute(array($transaction->getCode()));
-		$resellerClubTransaction = $stmt->fetch(\PDO::FETCH_ASSOC);
+		$resellerClubTransaction = $db->getResellerClubTransactionByPagSeguroTransactionId($transaction->getCode());
 
 		if ($resellerClubTransaction) {
 			$payment = new \ResellerClub\Pagseguro\Payment($this->config);
@@ -93,18 +87,31 @@ class Notification
 			if (true === $payment->post($resellerClubTransaction)) {
 				// Updates pagseguro transaction status on DB for reference
 				$resellerClubTransaction['pagseguroTransactionStatus'] = static::PAID;
+				
 				$update = 'UPDATE '.$this->config['TABLENAME'].' SET pagseguroTransactionStatus = ? WHERE id = ?';
-				$stmt2 = $con->prepare($update);
+				
+				$stmt2 = $db->getConnection()->prepare($update);
 				$stmt2->execute(array(static::PAID, $resellerClubTransaction['id']));
 			}
 		}
 	}
 
 	// here you can implement, if needed, to care about these statuses
-	protected function waitingPayment(\PagSeguroTransaction $transaction)	{ }
-	protected function inAnalysis(\PagSeguroTransaction $transaction)		{ }
-	protected function available(\PagSeguroTransaction $transaction)		{ }
-	protected function inDispute(\PagSeguroTransaction $transaction)		{ }
-	protected function refunded(\PagSeguroTransaction $transaction)			{ }
-	protected function cancelled(\PagSeguroTransaction $transaction)		{ }
+	protected function waitingPayment(\PagSeguroTransaction $transaction)
+	{ }
+	
+	protected function inAnalysis(\PagSeguroTransaction $transaction)
+	{ }
+	
+	protected function available(\PagSeguroTransaction $transaction)
+	{ }
+	
+	protected function inDispute(\PagSeguroTransaction $transaction)
+	{ }
+	
+	protected function refunded(\PagSeguroTransaction $transaction)
+	{ }
+	
+	protected function cancelled(\PagSeguroTransaction $transaction)
+	{ }
 }

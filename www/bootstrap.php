@@ -6,4 +6,7 @@
  */
 
 require_once __DIR__.'/../vendor/autoload.php';
+
+require_once __DIR__.'/../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
+
 require_once __DIR__.'/pagseguro_config.php';

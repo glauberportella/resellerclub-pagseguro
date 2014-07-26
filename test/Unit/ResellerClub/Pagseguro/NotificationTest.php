@@ -23,4 +23,14 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
 		'TABLENAME' 			=> 'resellerclub_pagseguro_transaction',
 
 	);
+
+	public function setUp()
+	{
+		$this->credentials = new \PagSeguroAccountCredentials($this->pagseguro_config['PAGSEGURO_EMAIL'], $this->pagseguro_config['PAGSEGURO_TOKEN']);
+	}
+
+	public function testCredentials()
+	{
+		$this->assertInstanceOf('\PagSeguroAccountCredentials', $this->credentials);
+	}
 }

@@ -35,7 +35,6 @@ class Database
 	/**
 	 * Saves a reseller club transaction on database
 	 * 
-	 * @param  \PDO    $con
 	 * @param  array   $transactionData IMPORTANT the transactionData array must keep the order of keys as the database table columns order
 	 * @return boolean
 	 */
@@ -50,9 +49,8 @@ class Database
 	}
 
 	/**
-	 * Gets a reseller club transaction by its transid
+	 * Gets a reseller club transaction by its (resellerclub) transid
 	 * 
-	 * @param  \PDO    $con
 	 * @param  string  $transid
 	 * @return array   Associative array with transaction column names as array keys
 	 */
@@ -62,6 +60,23 @@ class Database
 		
 		$stmt = static::getConnection()->prepare($sql);
 		$stmt->execute(array($transid));
+		$transaction = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+		return $transaction;
+	}
+
+	/**
+	 * Gets a reseller club transaction by its (pagseguro) transaction id
+	 * 
+	 * @param  string $pagseguroTransactionId
+	 * @return array   Associative array with transaction column names as array keys
+	 */
+	public function getResellerClubTransactionByPagSeguroTransactionId($pagseguroTransactionId)
+	{
+		$sql = 'SELECT * FROM '.static::$config['TABLENAME'].' WHERE pagseguroTransactionId = ?';
+
+		$stmt = static::getConnection()->prepare($sql);
+		$stmt->execute(array($pagseguroTransactionId));
 		$transaction = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 		return $transaction;
