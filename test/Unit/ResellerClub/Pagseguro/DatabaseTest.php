@@ -40,6 +40,9 @@ class DatabaseTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('\PDO', $con);
 	}
 
+	/**
+	 * @return array
+	 */
 	public function testSaveResellerClubTransaction()
 	{
 		$instance = \ResellerClub\Pagseguro\Database::instance($this->pagseguro_config);
@@ -48,7 +51,6 @@ class DatabaseTest extends \PHPUnit_Framework_TestCase
 		$con = $instance->getConnection();
 		$this->assertInstanceOf('\PDO', $con);
 
-		// truncate table data
 		$con->exec('TRUNCATE TABLE '.$this->pagseguro_config['TABLENAME']);
 
 		$sample_transaction = array(
@@ -89,6 +91,25 @@ class DatabaseTest extends \PHPUnit_Framework_TestCase
 		$success = $instance->saveResellerClubTransaction($sample_transaction);
 
 		$this->assertTrue($success);
+
+		return $sample_transaction;
+	}
+
+	/**
+	 * @depends testSaveResellerClubTransaction
+	 * 
+	 * @param  array  $sample_transaction
+	 */
+	public function testGetResellerClubTransactionById(array $sample_transaction)
+	{
+		$db = \ResellerClub\Pagseguro\Database::instance($this->pagseguro_config);
+		$this->assertInstanceOf('\ResellerClub\Pagseguro\Database', $db);
+
+		$transaction = $db->getResellerClubTransactionById($sample_transaction['transid']);
+
+		$this->assertEquals($transaction['transid'], $sample_transaction['transid']);
+
+		$db->getConnection()->exec('TRUNCATE TABLE '.$this->pagseguro_config['TABLENAME']);
 	}
 
 }

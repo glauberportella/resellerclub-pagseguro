@@ -81,7 +81,7 @@ class Notification
 		$db = \ResellerClub\Pagseguro\Database::instance($this->config);
 		$con = $db->getConnection();
 		
-		$sql = 'SELECT * FROM '.\ResellerClub\Pagseguro\Config::TABLENAME.' WHERE pagseguroTransactionId = ?';
+		$sql = 'SELECT * FROM '.$this->config['TABLENAME'].' WHERE pagseguroTransactionId = ?';
 		
 		$stmt = $con->prepare($sql);
 		$stmt->execute(array($transaction->getCode()));
@@ -100,7 +100,7 @@ class Notification
 		}
 	}
 
-	// here you can implement if needed to care about these statuses
+	// here you can implement, if needed, to care about these statuses
 	protected function waitingPayment(\PagSeguroTransaction $transaction)	{ }
 	protected function inAnalysis(\PagSeguroTransaction $transaction)		{ }
 	protected function available(\PagSeguroTransaction $transaction)		{ }
