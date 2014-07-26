@@ -1,4 +1,5 @@
 <?php
+
 namespace ResellerClub\Pagseguro;
 
 class Database
@@ -127,9 +128,9 @@ class Database
 			.'PRIMARY KEY(id),'
 			.'INDEX(transid),'
 			.'INDEX(pagseguroTransactionId)'
-		.')';
+		.') Engine=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci';
 
-		static::getConnection()->exec($sql);
+		static::$con->exec($sql);
 	}
 
 }
