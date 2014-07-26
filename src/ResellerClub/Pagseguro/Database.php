@@ -25,7 +25,7 @@ class Database
 	 */
 	public function getConnection()
 	{
-		if (null === $con) {
+		if (null === static::$con) {
 			static::$con = new \PDO(sprintf('mysql:dbname=%s;host=%s;port=%d', static::$config['DB_NAME'], static::$config['DB_HOST'], static::$config['DB_PORT']), static::$config['DB_USER'], static::$config['DB_PASS']);
 		}
 
@@ -43,7 +43,10 @@ class Database
 	{
 		$sql = 'INSERT INTO '.static::$config['TABLENAME'].' VALUES(NULL, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
 		$stmt = static::getConnection()->prepare($sql);
-		return $stmt->execute($transactionData);
+
+		$values = array_values($transactionData);
+		
+		return $stmt->execute($values);
 	}
 
 	/**
@@ -71,10 +74,10 @@ class Database
 	 */
 	static private function createTable()
 	{
-		$sql = 'CREATE TABLE IF NOT EXISTS '.static::$config['TABLENAME'].'('
+		$sql = 'CREATE TABLE IF NOT EXISTS `'.static::$config['TABLENAME'].'` ('
 			.'id 						INT UNSIGNED AUTO_INCREMENT NOT NULL,'
-			.'createdat 				DATETIME DEFAULT NOW(),'
-			.'key 						VARCHAR(64) NOT NULL,'
+			.'createdat 				TIMESTAMP DEFAULT CURRENT_TIMESTAMP,'
+			.'`key`						VARCHAR(64) NOT NULL,'
 			.'paymenttypeid 			INT UNSIGNED NOT NULL,'
 			.'transid 					VARCHAR(64) NOT NULL,'
 			.'userid 					INT UNSIGNED NOT NULL,'
@@ -93,7 +96,7 @@ class Database
 			.'address1					VARCHAR(255),'
 			.'address2					VARCHAR(100),'
 			.'address3					VARCHAR(100),'
-			.'city,						VARCHAR(50),'
+			.'city						VARCHAR(50),'
 			.'state						VARCHAR(50),'
 			.'country					VARCHAR(50),'
 			.'zip						VARCHAR(20),'
@@ -107,7 +110,8 @@ class Database
 			.'pagseguroTransactionId	VARCHAR(128),'
 			.'pagseguroTransactionStatus TINYINT DEFAULT 1,'
 			.'PRIMARY KEY(id),'
-			.'INDEX(transid)'
+			.'INDEX(transid),'
+			.'INDEX(pagseguroTransactionId)'
 		.')';
 
 		static::getConnection()->exec($sql);
