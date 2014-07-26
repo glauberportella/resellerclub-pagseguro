@@ -10,7 +10,7 @@
 	require_once(__DIR__."/bootstrap.php");
  ?>
 <html>
-<head><title>Pagamento Concluído</title></head>
+<head><title>Desenvolve4Web - Pagamento Concluído</title></head>
 <body bgcolor="white">
 <font size=4>
 

@@ -13,11 +13,42 @@ require_once __DIR__.'/../../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
 class Payment
 {
 	/**
+	 * Saves a reseller club transaction on database
+	 * 
+	 * @param  \PDO    $con
+	 * @param  array   $transactionData
+	 * @return boolean
+	 */
+	public function saveTransaction(\PDO $con, array $transactionData)
+	{
+		$sql = 'INSERT INTO '.\ResellerClubPagseguro\Config::TABLENAME.' VALUES(NULL, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+		$stmt = $con->prepare($sql);
+		return $stmt->execute($transactionData);
+	}
+
+	/**
+	 * Gets a reseller club transaction by its transid
+	 * 
+	 * @param  \PDO    $con
+	 * @param  string  $transid
+	 * @return array   Associative array with transaction column names as array keys
+	 */
+	public function getResellerClubTransactionById(\PDO $con, $transid)
+	{
+		$sql = 'SELECT * FROM '.\ResellerClubPagseguro\Config::TABLENAME.' WHERE transid = ?';
+		$stmt = $con->prepare($sql);
+		$stmt->execute(array($transid));
+		$transaction = $stmt->fetch(\PDO::FETCH_ASSOC);
+		return $transaction;
+	}
+
+	/**
 	 * Generate a payment request url for PagSeguro
 	 *
 	 * @param array $resellerPaymentData ResellerClub transaction information data for payment process
 	 * @param array $customerData ResellerClub customer information
-	 * @return boolean|string False on error or payment URL for PagSeguro
+	 * @throws \PagSeguroServiceException
+	 * @return string
 	 */
 	public function createRequestUrl(array $resellerPaymentData, array $customerData)
 	{
@@ -29,6 +60,7 @@ class Payment
 
 		// Add an item for this payment request
 		$amount = '0.00';
+
 		if ($resellerPaymentData['sellingcurrencyamount'] == $resellerPaymentData['accountingcurrencyamount'])
 		{
 			$amount = number_format($resellerPaymentData['sellingcurrencyamount'], 2, '.', '');
@@ -58,7 +90,6 @@ class Payment
 			$paymentRequest->addItem($resellerPaymentData['transid'], $description, 1, $amount);
 		}
 
-
 		// Sets a reference code for this payment request, it is useful to identify this payment in future notifications.
 		$paymentRequest->setReference($resellerPaymentData['transid']);
 
@@ -69,17 +100,15 @@ class Payment
 		$paymentRequest->setShippingType(\PagSeguroShippingType::getCodeByType('NOT_SPECIFIED'));
 
 		// Sets the url used by PagSeguro for redirect user after ends checkout process
-		$paymentRequest->setRedirectUrl(Config::PAGSEGURO_RETURN_URL);
+		$paymentRequest->setRedirectUrl(\ResellerClubPagseguro\Config::PAGSEGURO_RETURN_URL);
 
-		try {
-			// PagSeguro credentials
-			$credentials = new \PagSeguroAccountCredentials(Config::PAGSEGURO_EMAIL, Config::PAGSEGURO_TOKEN);
-			// Register this payment request in PagSeguro, to obtain the payment URL for redirect your customer.
-			$url = $paymentRequest->register($credentials);
-			return $url;
-		} catch (\PagSeguroServiceException $e) {
-			return false;
-		}
+		// PagSeguro credentials
+		$credentials = new \PagSeguroAccountCredentials(\ResellerClubPagseguro\Config::PAGSEGURO_EMAIL, \ResellerClubPagseguro\Config::PAGSEGURO_TOKEN);
+
+		// Register this payment request in PagSeguro, to obtain the payment URL for redirect your customer.
+		$url = $paymentRequest->register($credentials);
+
+		return $url;
 	}
 
 	public static function isSuccessTransaction()
