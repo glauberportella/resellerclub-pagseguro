@@ -15,8 +15,8 @@ $pagseguro_config = array(
 	// to save the transactions data on your MySQL server
 	'DB_HOST' 				=> 'localhost',	// change to your mysql server host
 	'DB_PORT' 				=> '3306',		// mysql port (default = 3306)
-	'DB_NAME' 				=> 'test', 		// change to your database name
-	'DB_USER' 				=> 'test', 		// change to your database user
+	'DB_NAME' 				=> 'desen3go_test', 		// change to your database name
+	'DB_USER' 				=> 'desen3go_test', 		// change to your database user
 	'DB_PASS' 				=> '1q2w3e',	// change to your database user password
 
 	// Default tablename for transactions in resellerclub with pagseguro	
