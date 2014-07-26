@@ -1,3 +1,7 @@
+<?php
+// ResellerClub-PagSeguro bootstrap
+require_once(__DIR__."/bootstrap.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,7 @@
 				<p class="lead">Agradecemos pela compra.</p>
 			</div>
 			<div class="panel-footer text-center">
-				<a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Retornar ao Site</a>
+				<a href="<?php echo $pagseguro_config['WEBSITE_URL'] ?>" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Retornar ao Site</a>
 			</div>
 		</div>
 	</div>

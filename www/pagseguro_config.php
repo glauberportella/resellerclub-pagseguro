@@ -22,4 +22,7 @@ $pagseguro_config = array(
 	// Default tablename for transactions in resellerclub with pagseguro	
 	'TABLENAME' 			=> 'resellerclub_pagseguro_transaction',
 
+	// URL to return to site, edit to your need
+	'WEBSITE_URL'			=> 'http://www.desenvolve4web.com',
+
 );

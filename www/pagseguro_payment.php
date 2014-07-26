@@ -93,7 +93,7 @@ else
 				<p class="lead">Algum erro ocorreu no processamento. Nada foi debitado de sua conta. Tente novamente mais tarde, se o error persistir entre em contato com o suporte.</p>
 			</div>
 			<div class="panel-footer text-center">
-				<a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Retornar ao Site</a>
+				<a href="<?php echo $pagseguro_config['WEBSITE_URL'] ?>" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Retornar ao Site</a>
 			</div>
 		</div>
 	</div>
