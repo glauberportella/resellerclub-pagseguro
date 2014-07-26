@@ -1,30 +1,28 @@
 <?php
 
-if (!defined('PAGSEGURO_LIBRARY')) {
-    die('No direct script access allowed');
-}
 /*
  * ***********************************************************************
-  Copyright [2011] [PagSeguro Internet Ltda.]
+ Copyright [2011] [PagSeguro Internet Ltda.]
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  * ***********************************************************************
  */
 
 /**
  * Defines a list of known payment method codes.
  */
-class PagSeguroPaymentMethodCode {
+class PagSeguroPaymentMethodCode
+{
 
     private static $codeList = array(
         /**
@@ -100,6 +98,10 @@ class PagSeguroPaymentMethodCode {
          */
         'AVISTA_CREDIT_CARD' => 118,
         /**
+         * GranCard
+         */
+        'GRANDCARD_CREDIT_CARD' => 119,
+        /**
          * Bradesco - boleto -  is a form of invoicing in Brazil
          */
         'BRADESCO_BOLETO' => 201,
@@ -142,7 +144,11 @@ class PagSeguroPaymentMethodCode {
         /**
          * OiPaggo
          */
-        'OI_PAGGO' => 501
+        'OI_PAGGO' => 501,
+        /**
+         * Banco do Brasil direct deposit
+         */
+        'BANCO_BRASIL_DIRECT_DEPOSIT' => 701
     );
 
     /**
@@ -151,17 +157,20 @@ class PagSeguroPaymentMethodCode {
      */
     private $value;
 
-    public function __construct($value = null) {
+    public function __construct($value = null)
+    {
         if ($value) {
             $this->value = $value;
         }
     }
 
-    public function setValue($value) {
+    public function setValue($value)
+    {
         $this->value = $value;
     }
 
-    public function setByType($type) {
+    public function setByType($type)
+    {
         if (isset(self::$codeList[$type])) {
             $this->value = self::$codeList[$type];
         } else {
@@ -170,22 +179,21 @@ class PagSeguroPaymentMethodCode {
     }
 
     /**
-     * @return the payment method code value
+     * @return integer the payment method code value
      * Example: 101
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
     /**
-     * @param value
-     * @return the PagSeguroPaymentMethodCode corresponding to the informed value
+     * @param $value
+     * @return PagSeguroPaymentMethodCode the corresponding to the informed value
      */
-    public function getTypeFromValue($value = null) {
+    public function getTypeFromValue($value = null)
+    {
         $value = ($value == null ? $this->value : $value);
-        return array_search($this->value, self::$codeList);
+        return array_search($value, self::$codeList);
     }
-
 }
-
-?>

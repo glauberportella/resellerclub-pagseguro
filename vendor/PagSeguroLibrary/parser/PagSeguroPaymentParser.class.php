@@ -1,29 +1,37 @@
 <?php
 
-if (!defined('PAGSEGURO_LIBRARY')) {
-    die('No direct script access allowed');
-}
 /*
  * ***********************************************************************
-  Copyright [2011] [PagSeguro Internet Ltda.]
+ Copyright [2011] [PagSeguro Internet Ltda.]
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  * ***********************************************************************
  */
 
-class PagSeguroPaymentParser extends PagSeguroServiceParser {
+/**
+ * Class PagSeguroPaymentParser
+ */
+class PagSeguroPaymentParser extends PagSeguroServiceParser
+{
 
-    public static function getData($payment) {
+    /**
+     * @param $payment PagSeguroPaymentRequest
+     * @return mixed
+     */
+    public static function getData($payment)
+    {
+
+        $data = null;
 
         // reference
         if ($payment->getReference() != null) {
@@ -49,13 +57,14 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                     $data['senderPhone'] = $payment->getSender()->getPhone()->getNumber();
                 }
             }
-            
+
             // documents
-            if ($payment->getSender()->getDocuments() != null){
+            /** @var $document PagSeguroDocument */
+            if ($payment->getSender()->getDocuments() != null) {
                 $documents = $payment->getSender()->getDocuments();
-                if (is_array($documents) && count($documents) == 1){
+                if (is_array($documents) && count($documents) == 1) {
                     foreach ($documents as $document) {
-                        if (!is_null($document)){
+                        if (!is_null($document)) {
                             $data['senderCPF'] = $document->getValue();
                         }
                     }
@@ -111,7 +120,7 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
 
             if ($payment->getShipping()->getCost() != null && $payment->getShipping()->getCost() != null) {
-                $data['shippingCost'] = $payment->getShipping()->getCost();
+                $data['shippingCost'] = PagSeguroHelper::decimalFormat($payment->getShipping()->getCost());
             }
 
             // address
@@ -140,7 +149,7 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                 if ($payment->getShipping()->getAddress()->getCountry() != null) {
                     $data['shippingAddressCountry'] = $payment->getShipping()->getAddress()->getCountry();
                 }
-            } 
+            }
         }
 
         // maxAge
@@ -162,10 +171,48 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             $data['notificationURL'] = $payment->getNotificationURL();
         }
 
+        // metadata
+        if (count($payment->getMetaData()->getItems()) > 0) {
+            $i = 0;
+            foreach ($payment->getMetaData()->getItems() as $item) {
+                if ($item instanceof PagSeguroMetaDataItem) {
+                    if (!PagSeguroHelper::isEmpty($item->getKey()) && !PagSeguroHelper::isEmpty($item->getValue())) {
+                        $i++;
+                        $data['metadataItemKey' . $i] = $item->getKey();
+                        $data['metadataItemValue' . $i] = $item->getValue();
+
+                        if (!PagSeguroHelper::isEmpty($item->getGroup())) {
+                            $data['metadataItemGroup' . $i] = $item->getGroup();
+                        }
+                    }
+                }
+            }
+        }
+
+        // parameter
+        if (count($payment->getParameter()->getItems()) > 0) {
+            foreach ($payment->getParameter()->getItems() as $item) {
+                if ($item instanceof PagSeguroParameterItem) {
+                    if (!PagSeguroHelper::isEmpty($item->getKey()) && !PagSeguroHelper::isEmpty($item->getValue())) {
+                        if (!PagSeguroHelper::isEmpty($item->getGroup())) {
+                            $data[$item->getKey() . '' . $item->getGroup()] = $item->getValue();
+                        } else {
+                            $data[$item->getKey()] = $item->getValue();
+                        }
+                    }
+                }
+            }
+        }
+
         return $data;
     }
 
-    public static function readSuccessXml($str_xml) {
+    /**
+     * @param $str_xml
+     * @return PagSeguroPaymentParserData
+     */
+    public static function readSuccessXml($str_xml)
+    {
         $parser = new PagSeguroXmlParser($str_xml);
         $data = $parser->getResult('checkout');
         $PaymentParserData = new PagSeguroPaymentParserData();
@@ -173,7 +220,4 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
         $PaymentParserData->setRegistrationDate($data['date']);
         return $PaymentParserData;
     }
-
 }
-
-?>

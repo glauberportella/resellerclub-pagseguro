@@ -1,24 +1,24 @@
-<?php if (!defined('ALLOW_PAGSEGURO_CONFIG')) { die('No direct script access allowed'); }
+<?php
+
 /*
-************************************************************************
-PagSeguro Config File
-************************************************************************
-*/
+ ************************************************************************
+ PagSeguro Config File
+ ************************************************************************
+ */
 
 $PagSeguroConfig = array();
 
-$PagSeguroConfig['environment'] = Array();
-$PagSeguroConfig['environment']['environment'] = "production";
+//$PagSeguroConfig['environment'] = array();
+$PagSeguroConfig['environment'] = "production"; // production, sandbox
 
-$PagSeguroConfig['credentials'] = Array();
-$PagSeguroConfig['credentials']['email'] = "glauberportella@gmail.com";
-$PagSeguroConfig['credentials']['token'] = "8DAEC9E606FC409084D42A125278B756";
+$PagSeguroConfig['credentials'] = array();
+$PagSeguroConfig['credentials']['email'] = "your_pagseguro_email";
+$PagSeguroConfig['credentials']['token']['production'] = "your_production_pagseguro_token";
+$PagSeguroConfig['credentials']['token']['sandbox'] = "your_sandbox_pagseguro_token";
 
-$PagSeguroConfig['application'] = Array();
+$PagSeguroConfig['application'] = array();
 $PagSeguroConfig['application']['charset'] = "UTF-8"; // UTF-8, ISO-8859-1
 
-$PagSeguroConfig['log'] = Array();
-$PagSeguroConfig['log']['active'] = FALSE;
+$PagSeguroConfig['log'] = array();
+$PagSeguroConfig['log']['active'] = false;
 $PagSeguroConfig['log']['fileLocation'] = "";
-
-?>

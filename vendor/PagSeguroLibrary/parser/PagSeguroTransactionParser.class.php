@@ -1,29 +1,35 @@
 <?php
 
-if (!defined('PAGSEGURO_LIBRARY')) {
-    die('No direct script access allowed');
-}
 /*
  * ***********************************************************************
-  Copyright [2011] [PagSeguro Internet Ltda.]
+ Copyright [2011] [PagSeguro Internet Ltda.]
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  * ***********************************************************************
  */
 
-class PagSeguroTransactionParser extends PagSeguroServiceParser {
+/**
+ * Class PagSeguroTransactionParser
+ */
+class PagSeguroTransactionParser extends PagSeguroServiceParser
+{
 
-    public static function readSearchResult($str_xml) {
+    /**
+     * @param $str_xml
+     * @return PagSeguroTransactionSearchResult
+     */
+    public static function readSearchResult($str_xml)
+    {
 
         $parser = new PagSeguroXmlParser($str_xml);
         $data = $parser->getResult('transactionSearchResult');
@@ -62,16 +68,18 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         return $searchResutlt;
     }
 
-    public static function readTransaction($str_xml) {
+    /**
+     * @param $str_xml
+     * @return PagSeguroTransaction
+     */
+    public static function readTransaction($str_xml)
+    {
 
         // Parser
         $parser = new PagSeguroXmlParser($str_xml);
 
         // <transaction>
         $data = $parser->getResult('transaction');
-
-        PagSeguroHelper::print_rr($data);
-        exit();
 
         $transaction = new PagSeguroTransaction();
 
@@ -155,7 +163,7 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
 
         if (isset($data["items"]['item']) && is_array($data["items"]['item'])) {
 
-            $items = Array();
+            $items = array();
             $i = 0;
 
             if (isset($data["items"]['item'][0])) {
@@ -215,7 +223,7 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
                     }
                 }
             }
-            
+
             $transaction->setSender($sender);
         }
 
@@ -289,7 +297,12 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         return $transaction;
     }
 
-    private static function parseTransactionItem($data) {
+    /**
+     * @param $data
+     * @return PagSeguroItem
+     */
+    private static function parseTransactionItem($data)
+    {
 
         // <transaction> <items> <item>
         $item = new PagSeguroItem();
@@ -322,7 +335,12 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         return $item;
     }
 
-    private static function parseTransactionSummary($data) {
+    /**
+     * @param $data
+     * @return PagSeguroTransactionSummary
+     */
+    private static function parseTransactionSummary($data)
+    {
 
         $transactionSummary = new PagSeguroTransactionSummary();
 
@@ -373,9 +391,10 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
             $transactionSummary->setPaymentMethod($paymentMethod);
         }
 
+        if (isset($data["recoveryCode"])) {
+            $transactionSummary->setRecoveryCode($data["recoveryCode"]);
+        }
+        
         return $transactionSummary;
     }
-
 }
-
-?>

@@ -20,7 +20,7 @@
 		$transaction_id = $_GET['transaction_id'];
 		  
 		// gets pagseguro transaction so we can get reseller club transid from reference code
-		$transaction = PagSeguroTransactionSearchService::searchByCode(
+		$transaction = \PagSeguroTransactionSearchService::searchByCode(
 		    $credentials,
 		    $transaction_id  
 		);
