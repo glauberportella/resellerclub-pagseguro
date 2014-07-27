@@ -113,9 +113,13 @@ class Payment
 		$curl = curl_init();
 
 		curl_setopt( $curl , CURLOPT_URL , $redirectUrl );
+		curl_setopt( $curl , CURLOPT_USERAGENT , 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36');
+		curl_setopt( $curl , CURLOPT_FOLLOWLOCATION , true );
+		curl_setopt( $curl , CURLOPT_RETURNTRANSFER , true );
 		curl_setopt( $curl , CURLOPT_SSL_VERIFYPEER , false );
-		curl_setopt( $curl , CURLOPT_RETURNTRANSFER , 1 );
-		curl_setopt( $curl , CURLOPT_POST , 1 );
+		curl_setopt( $curl , CURLOPT_POST , true );
+		curl_setopt( $curl , CURLOPT_COOKIEFILE , 'cookie.txt' );
+		curl_setopt( $curl , CURLOPT_COOKIEJAR  , 'cookie.txt' );
 		curl_setopt( $curl , CURLOPT_POSTFIELDS , http_build_query( array(
 				'transid' => $transId,
 				'status' => $status,

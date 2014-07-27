@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Please wait while you're redirected</title>
+<style type="text/css">
+@import url( /css/ui-ob-styles_84534f2584b0c2f1182bde163385ce37.css );
+</style><script type="text/javascript">
+	
+function timedText()
+{
+	setTimeout('msg1()', 2000);
+	setTimeout('msg2()', 4000);
+	setTimeout('document.MetaRefreshForm.submit()',4000);
+}
+
+function msg1() {
+	document.getElementById('login-redirect-message').firstChild.nodeValue = "Carregando customizações...";
+}
+
+function msg2() {
+	document.getElementById('login-redirect-message').firstChild.nodeValue = "Redirecionando...";
+}
+
+</script></head>
+
+<body id="login-redirect">
+
+	<div id="login-redirect-container">
+
+		<h1>Por favor aguarde enquanto você é redirecionado</h1>
+		<p class="login-redirect-message" id="login-redirect-message">Autenticando...</p>
+<script type="text/javascript">timedText()</script>		<img src="/images/login-redirection-loader.gif" alt="...">
+	</div>
+	<form name="MetaRefreshForm" action="http://manage.br.resellerclub.com/servlet/AuthenticationPassServlet" method="POST">
+		<input type="hidden" name="userLoginId" value="J8Ca8h9t">
+		<input type="hidden" name="userid" value="469497">
+		<input type="hidden" name="redirectpage" value="null">
+		<input type="hidden" name="current_url" value="http://manage.br.resellerclub.com">
+		<input type="hidden" name="logouturl" value="http%3A%2F%2Fbr.resellerclub.com">
+		<input type="hidden" name="langpref" value="pt">
+		<input type="hidden" name="lastLogin" value="1406459575">
+		<input type="hidden" name="role" value="reseller">
+	</form>
+</body>
+</HTML>
