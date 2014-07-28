@@ -1,6 +1,9 @@
 <?php
 session_save_path('./');
 session_start();
+
+// ResellerClub-PagSeguro bootstrap
+require_once(__DIR__."/bootstrap.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,9 +17,6 @@ session_start();
 	<div class="container">
 
 		<?php
-		// ResellerClub-PagSeguro bootstrap
-		require_once(__DIR__."/bootstrap.php");
-
 		// saves transaction id on reseller transaction table
 		$credentials = new \PagSeguroAccountCredentials($pagseguro_config['PAGSEGURO_EMAIL'], $pagseguro_config['PAGSEGURO_TOKEN']);
 		  
@@ -41,6 +41,12 @@ session_start();
 
 			if (true === $success)
 			{
+				// post payment
+				$resellerClubTransaction = $db->getResellerClubTransactionByPagSeguroTransactionId($transaction->getCode());
+				$payment = new \ResellerClub\Pagseguro\Payment($pagseguro_config);
+				$success = $payment->post($resellerClubTransaction);
+				if (true === $success)
+				{
 		?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -55,6 +61,24 @@ session_start();
 					</div>
 				</div>
 		<?php
+				}
+				else
+				{
+		?>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>Erro ao salvar Pagamento</h2>
+					</div>
+					<div class="panel-body">
+						<p class="lead">Seu pedido se encontra em nosso sistema porém não foi possível atualizá-lo com o dado da transação PagSeguro.</p>
+						<p class="lead">Entre em contato com o suporte e informe o ocorrido com o <b>ID da Transação PagSeguro <?php transaction_id ?></b>.</p>
+					</div>
+					<div class="panel-footer text-center">
+						<a href="<?php echo $pagseguro_config['WEBSITE_URL'] ?>" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Retornar ao Site</a>
+					</div>
+				</div>
+		<?php
+				}
 			}
 			else
 			{

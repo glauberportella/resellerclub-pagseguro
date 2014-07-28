@@ -101,7 +101,7 @@ class Payment
 		$transId = $transaction['transid'];
 		$sellingCurrencyAmount = $transaction['sellingcurrencyamount'];
 		$accountingCurrencyAmount = $transaction['accountingcurrencyamount'];
-		$status = $transaction['pagseguroTransactionStatus'] === \ResellerClub\Pagseguro\Notification::PAID ? 'Y' : 'N';
+		$status = $transaction['pagseguroTransactionStatus'] === \ResellerClub\Pagseguro\Notification::PAID ? 'Y' : 'P';
 
 		// random key
 		srand((double)microtime()*1000000);

@@ -58,7 +58,6 @@ for ($i = $inputs->length; --$i >= 0;) {
 	$input = $inputs->item($i);
 	$postParams[$input->getAttribute('name')] = $input->getAttribute('value');
 }
-print_r($postParams); exit();
 
 $postUrl = 'http://manage.br.resellerclub.com/servlet/AuthenticationPassServlet';
 $curl = curl_init();
