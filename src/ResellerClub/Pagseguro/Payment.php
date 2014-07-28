@@ -89,6 +89,8 @@ class Payment
 	/**
 	 * Post process Resellerclub payment
 	 * 
+	 * A logged in resellerclub session must be active
+	 * 
 	 * @param array $transaction Transaction from ResellerClub as saved in DB
 	 */
 	public function post(array $transaction)
