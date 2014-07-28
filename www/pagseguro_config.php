@@ -12,15 +12,15 @@ $pagseguro_config = array(
 	 ********************************************************************************************/
 
 	// Your ResellerClub KEY for Payment Gateway and other parameters, change to fit your needs
-	'RESELLERCLUB_KEY' 			=> 'AhBNDrHBeIcHqcZHe3usTBvvnrfXKNKC',
+	'RESELLERCLUB_KEY' 			=> '',
 	// Your ResellerClub ID (Access your account and go to Manage Profile, this must be the number in Reseller ID field)
 	'RESELLERCLUB_RESELLER_ID'	=> '',
 	//  ResellerClub API Key (Access your account, click Settings > API, and then View API key)
 	//  if, on future, you generate a new fresh API Key, you must specify it again here
 	'RESELLERCLUB_API_KEY'		=> '',
 	// Your ResellerClub user access and password
-	'RESELLERCLUB_USERNAME'		=> 'host@desenvolve4web.com',
-	'RESELLERCLUB_PASSWORD'		=> 'devgp120182',
+	'RESELLERCLUB_USERNAME'		=> '',
+	'RESELLERCLUB_PASSWORD'		=> '',
 
 	// REMEMBER TO WHITELIST YOUR SERVER IP WITH RESELLERCLUB
 	// 1. Login to your Reseller Control Panel.
@@ -35,8 +35,8 @@ $pagseguro_config = array(
 	 ********************************************************************************************/
 
 	'PAGSEGURO_RETURN_URL' 	=> 'http://pagamento.desenvolve4web.com/pagseguro_return.php',
-	'PAGSEGURO_EMAIL' 		=> 'host@desenvolve4web.com',
-	'PAGSEGURO_TOKEN' 		=> '8DAEC9E606FC409084D42A125278B756',
+	'PAGSEGURO_EMAIL' 		=> '',
+	'PAGSEGURO_TOKEN' 		=> '',
 
 	/********************************************************************************************
 	 * 3. DATABASE PARAMS

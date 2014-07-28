@@ -1,21 +1,19 @@
-SETUP
-=====
+# About
 
-1. Edit src/ResellerClubPagseguro/Config.php, change params for ResellerClub and PagSeguro
+A PagSeguro (http://www.pagseguro.com.br) brazillian Payment Gateway Integration for Reseller Club resellers.
 
-	    const RESELLERCLUB_KEY = 'YOUR RESELLER CLUB SECURE KEY';  
-	    const PAGSEGURO_RETURN_URL = 'YOUR HOST OR DOMAIN/resellerclub/postpayment.php';  
-	    const PAGSEGURO_EMAIL = 'PAGSEGURO ACCOUNT EMAIL';  
-	    const PAGSEGURO_TOKEN = 'PAGSEGURO TOKEN';  
+# Setup
 
-2. Upload www content to your server public html directory
+1. Copy 'www/' directory contents to your web public directory (or one of your choice in your public web dir);
 
-3. Upload src and vendor dir to non web accessible directory (i.e. if in a linux cpanel host the www content to public_html and src and vendor to account root dir)
+2. Copy 'src' and 'vendor' directories to a non-public directory on your server;
 
-4. Edit www/bootstrap.php to point correctly to where you put the vendor dir
+3. Edit www/pagseguro_config.php, change params for ResellerClub and PagSeguro to your needs;
 
-5. Edit www/resellerclub/paymentpage.php to your site needs
+4. Edit www/bootstrap.php to point correctly to where you put the vendor dir relative to your 'www' (web public dir);
 
-6. Edit www/resellerclub/postpayment.php to your site needs
+5. On your ResellerClub Panel go to settings and add a New Payment Gateway and inform the Gateway Url to 'pagseguro_payment.php' on your web public directory. Ex.: http://www.yoursite.com/pagseguro_payment.php;
 
-7. Done
+6. On your PagSeguro account configure the Notification API to point to http://www.yoursite.com/pagseguro_notification.php;
+
+7. Done.
