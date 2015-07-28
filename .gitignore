@@ -1,2 +1,4 @@
 /www/test
 composer.phar
+*.sublime-project
+*.sublime-workspace

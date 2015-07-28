@@ -2,7 +2,13 @@
 
 A PagSeguro (http://www.pagseguro.com.br) brazillian Payment Gateway Integration for Reseller Club resellers.
 
-# Setup
+# Development
+
+Clone the repository `git clone git@github.com:glauberportella/resellerclub-pagseguro.git`
+
+Install dependencies `composer install`
+
+# Setup on your Host
 
 1. Copy 'www/' directory contents to your web public directory (or one of your choice in your public web dir);
 
