@@ -91,7 +91,7 @@ class Payment
 
 		try {
 			// PagSeguro credentials
-			$credentials = new \PagSeguroAccountCredentials(Config::PAGSEGURO_EMAIL, Config::PAGSEGURO_TOKEN);
+			$credentials = PagSeguroConfig::getAccountCredentials();
 			// Register this payment request in PagSeguro, to obtain the payment URL for redirect your customer.
 			$url = $paymentRequest->register($credentials);
 			return $url;
