@@ -1,7 +1,7 @@
 <?php
 namespace ResellerClubPagseguro;
 
-require_once __DIR__.'/../../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
+use PagSeguroConfig;
 
 /**
  * Class to process Pagseguro payments from ResellerClub
@@ -12,6 +12,24 @@ require_once __DIR__.'/../../vendor/PagSeguroLibrary/PagSeguroLibrary.php';
  */
 class Payment
 {
+	public function __construct()
+	{
+		// pagseguro config
+		// set pagseguro config
+		$configData = Config::getPagSeguroConfig();
+
+		PagSeguroConfig::setEnvironment($configData['environment']);
+		PagSeguroConfig::setApplicationCharset($configData['application']['charset']);
+		foreach ($configData as $key1 => $config) {
+			if (in_array($key1, array('environment', 'application')))
+				continue;
+
+			foreach ($config as $key2 => $value) {
+				PagSeguroConfig::setData($key1, $key2, $value);
+			}
+		}
+	}
+
 	/**
 	 * Generate a payment request url for PagSeguro
 	 *

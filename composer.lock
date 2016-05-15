@@ -1,0 +1,57 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "b38f72ff98f0f6c7fae00948b0621324",
+    "content-hash": "fc3b90bd4e9db1fc761679897d9e38ce",
+    "packages": [
+        {
+            "name": "pagseguro/php",
+            "version": "dev-fix-statics",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glauberportella/pagseguro-php.git",
+                "reference": "cec2c75cc4a90307f0703c2c5b525e2bbb89da62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glauberportella/pagseguro-php/zipball/cec2c75cc4a90307f0703c2c5b525e2bbb89da62",
+                "reference": "cec2c75cc4a90307f0703c2c5b525e2bbb89da62",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "lib-curl": "*",
+                "lib-libxml": "*",
+                "lib-openssl": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "source/PagSeguroLibrary"
+                ]
+            },
+            "license": [
+                "Apache License 2.0"
+            ],
+            "description": "Biblioteca de integração com o PagSeguro",
+            "support": {
+                "source": "https://github.com/glauberportella/pagseguro-php/tree/fix-statics"
+            },
+            "time": "2015-11-23 13:39:47"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "pagseguro/php": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

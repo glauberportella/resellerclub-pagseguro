@@ -7,10 +7,16 @@
             "email": "glauberportella@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/glauberportella/pagseguro-php.git"
+        }
+    ],
     "autoload": {
         "psr-0": {"": "src/"}
     },
     "require": {
-
+        "pagseguro/php": "dev-fix-statics"
     }
 }

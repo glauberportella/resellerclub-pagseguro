@@ -5,7 +5,33 @@ class Config
 {
 	// Your ResellerClub KEY for Payment Gateway
 	const RESELLERCLUB_KEY = 'AhBNDrHBeIcHqcZHe3usTBvvnrfXKNKC';
-	const PAGSEGURO_RETURN_URL = 'http://site.pagamento.com/postpayment.php';
-	const PAGSEGURO_EMAIL = 'email@pagamento.com';
-	const PAGSEGURO_TOKEN = '8DAEC9E606FC409084D42A125278B756';
+
+	public static function getPagSeguroConfig()
+	{
+		return array(
+			'environment' => 'sandbox', // sandbox or production
+			'credentials' => array(
+				'email' => 'glauberportella@gmail.com',
+				'token' => array(
+					'sandbox' => 'E67C7B3036764CE695250776DAB54AC0',
+					'production' => 'FD362C3423F94F0E97F5906E483D3423',
+				),
+				'appId' => array(
+					'sandbox' => '',
+					'production' => '',
+				),
+				'appKey' => array(
+					'sandbox' => '',
+					'production' => '',
+				),
+			),
+			'application' => array(
+				'charset' => 'UTF-8',
+			),
+			'log' => array(
+				'active' => false,
+				'fileLocation' => '',
+			),
+		);
+	}
 }
