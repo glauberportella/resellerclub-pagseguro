@@ -18,6 +18,7 @@ class Payment
 		// set pagseguro config
 		$configData = Config::getPagSeguroConfig();
 
+		PagSeguroConfig::init();
 		PagSeguroConfig::setEnvironment($configData['environment']);
 		PagSeguroConfig::setApplicationCharset($configData['application']['charset']);
 		foreach ($configData as $key1 => $config) {
