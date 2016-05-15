@@ -34,6 +34,7 @@ return array(
     'PagSeguroCreditCardCheckout' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroCreditCardCheckout.class.php',
     'PagSeguroCreditCardHolder' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroCreditCardHolder.class.php',
     'PagSeguroCurrencies' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroCurrencies.class.php',
+    'PagSeguroDirectPaymentInstallment' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroDirectPaymentInstallment.class.php',
     'PagSeguroDirectPaymentMethods' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroDirectPaymentMethods.class.php',
     'PagSeguroDirectPaymentParser' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/parser/PagSeguroDirectPaymentParser.class.php',
     'PagSeguroDirectPaymentRequest' => $vendorDir . '/pagseguro/php/source/PagSeguroLibrary/domain/PagSeguroDirectPaymentRequest.class.php',

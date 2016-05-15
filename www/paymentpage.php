@@ -1,4 +1,8 @@
 <?php
+
+	init_set('display_errors', 1);
+	error_reporting(E_ALL);
+
 	session_start();
 	@session_save_path("./");  //specify path where you want to save the session.
 	require("functions.php");	//file which has required functions

@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b38f72ff98f0f6c7fae00948b0621324",
-    "content-hash": "fc3b90bd4e9db1fc761679897d9e38ce",
+    "hash": "8af8954fca36d8dfd423143a6aa615b0",
+    "content-hash": "89ab557366d609ff296e48ae4b65ddce",
     "packages": [
         {
             "name": "pagseguro/php",
-            "version": "dev-fix-statics",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glauberportella/pagseguro-php.git",
-                "reference": "cec2c75cc4a90307f0703c2c5b525e2bbb89da62"
+                "url": "https://github.com/pagseguro/php.git",
+                "reference": "1c956e609acdef2dd7a37ece5cb5d13e7fc672a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glauberportella/pagseguro-php/zipball/cec2c75cc4a90307f0703c2c5b525e2bbb89da62",
-                "reference": "cec2c75cc4a90307f0703c2c5b525e2bbb89da62",
+                "url": "https://api.github.com/repos/pagseguro/php/zipball/1c956e609acdef2dd7a37ece5cb5d13e7fc672a0",
+                "reference": "1c956e609acdef2dd7a37ece5cb5d13e7fc672a0",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
                 "lib-curl": "*",
                 "lib-libxml": "*",
                 "lib-openssl": "*",
-                "php": ">=5.3.3"
+                "php": ">=5.4.27"
             },
             "type": "library",
             "autoload": {
@@ -34,21 +34,19 @@
                     "source/PagSeguroLibrary"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache License 2.0"
             ],
             "description": "Biblioteca de integração com o PagSeguro",
-            "support": {
-                "source": "https://github.com/glauberportella/pagseguro-php/tree/fix-statics"
-            },
-            "time": "2015-11-23 13:39:47"
+            "time": "2016-01-28 20:17:46"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "pagseguro/php": 20
+        "pagseguro/php": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
