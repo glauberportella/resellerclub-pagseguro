@@ -12,16 +12,18 @@ use PagSeguroConfig;
  */
 class Payment
 {
+	protected $pagSeguroConfig;
+
 	public function __construct()
 	{
 		// pagseguro config
 		// set pagseguro config
-		$configData = Config::getPagSeguroConfig();
+		$this->pagSeguroConfig = Config::getPagSeguroConfig();
 
 		PagSeguroConfig::init();
-		PagSeguroConfig::setEnvironment($configData['environment']);
-		PagSeguroConfig::setApplicationCharset($configData['application']['charset']);
-		foreach ($configData as $key1 => $config) {
+		PagSeguroConfig::setEnvironment($this->pagSeguroConfig['environment']);
+		PagSeguroConfig::setApplicationCharset($this->pagSeguroConfig['application']['charset']);
+		foreach ($this->pagSeguroConfig as $key1 => $config) {
 			if (in_array($key1, array('environment', 'application')))
 				continue;
 
@@ -58,7 +60,7 @@ class Payment
 			$amount = number_format($resellerPaymentData['sellingcurrencyamount'], 2, '.', '');
 		}
 
-		if (in_array($resellerPaymentData['transactionType'], array('ResellerPayment', 'CustomerPayment')))
+		if (in_array($resellerPaymentData['transactiontype'], array('ResellerPayment', 'CustomerPayment')))
 		{
 			$description = substr($resellerPaymentData['description'], 0, 100);
 

@@ -5,6 +5,7 @@ class Config
 {
 	// Your ResellerClub KEY for Payment Gateway
 	const RESELLERCLUB_KEY = 'AhBNDrHBeIcHqcZHe3usTBvvnrfXKNKC';
+	const PAGSEGURO_RETURN_URL = 'http://pagamento.desenvolve4web.com/postpayment.php';
 
 	public static function getPagSeguroConfig()
 	{
