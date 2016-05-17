@@ -12,8 +12,6 @@ require_once(__DIR__."/bootstrap.php");
 <font size=4>
 
 <?php
-		print_r($_REQUEST); exit;
-
 		$key = \ResellerClubPagseguro\Config::RESELLERCLUB_KEY; //replace ur 32 bit secure key , Get your secure key from your Reseller Control panel
 
 		$redirectUrl = $_SESSION['redirecturl'];  // redirectUrl received from foundation
@@ -38,7 +36,6 @@ require_once(__DIR__."/bootstrap.php");
 
 
 		$checksum = generateChecksum($transId,$sellingCurrencyAmount,$accountingCurrencyAmount,$status, $rkey,$key);
-
 ?>
 		<form name="f1" action="<?php echo $redirectUrl;?>">
 			<input type="hidden" name="transid" value="<?php echo $transId;?>">
