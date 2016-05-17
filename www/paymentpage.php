@@ -4,7 +4,6 @@
 	error_reporting(E_ALL);
 
 	session_start();
-	@session_save_path("./");  //specify path where you want to save the session.
 	require("functions.php");	//file which has required functions
 	// ResellerClub-PagSeguro bootstrap
 	require_once(__DIR__."/bootstrap.php");
@@ -99,6 +98,9 @@
 			foreach ($customerData as $key => $value) {
 				$_SESSION[$key] = $value;
 			}
+
+			// transId on session
+			$_SESSION['transid'] = $transId;
 
 			$payment = new \ResellerClubPagseguro\Payment();
 			$paymentUrl = $payment->createRequestUrl($resellerPaymentData, $customerData);

@@ -1,13 +1,10 @@
 <?php
-	 session_start();
-	 @session_save_path("./"); //path on your server where you are storing session
+ session_start();
+//file which has required functions
+require("functions.php");
 
-
-	//file which has required functions
-	require("functions.php");
-
-	// ResellerClub-PagSeguro bootstrap
-	require_once(__DIR__."/bootstrap.php");
+// ResellerClub-PagSeguro bootstrap
+require_once(__DIR__."/bootstrap.php");
  ?>
 <html>
 <head><title>Pagamento Concluído</title></head>
