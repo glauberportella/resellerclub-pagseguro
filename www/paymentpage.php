@@ -99,9 +99,6 @@
 				$_SESSION[$key] = $value;
 			}
 
-			// transId on session
-			$_SESSION['transid'] = $transId;
-
 			$payment = new \ResellerClubPagseguro\Payment();
 			$paymentUrl = $payment->createRequestUrl($resellerPaymentData, $customerData);
 			if ($paymentUrl) {

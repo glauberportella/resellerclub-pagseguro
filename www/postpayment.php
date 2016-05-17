@@ -31,47 +31,14 @@ require_once(__DIR__."/bootstrap.php");
 		* And it has not been tampered with. The data has not been changed since it can * easily be done with HTTP request.
 		*
 		**/
+		print_r($_SESSION); exit;
 
 		srand((double)microtime()*1000000);
 		$rkey = rand();
 
 
-		$checksum =generateChecksum($transId,$sellingCurrencyAmount,$accountingCurrencyAmount,$status, $rkey,$key);
+		$checksum = generateChecksum($transId,$sellingCurrencyAmount,$accountingCurrencyAmount,$status, $rkey,$key);
 
-		// TRY POST to ResellerClub Server
-		// do post eith curl
-		// to it works we need to store session in cookie
-		/*$sessionName = session_name();
-		$strCookie = sprintf('%s=%s; path=/', $sessionName, $_COOKIE[$sessionName]);
-		session_write_close();
-
-		$curl = curl_init();
-
-		curl_setopt( $curl , CURLOPT_URL , $redirectUrl );
-		curl_setopt( $curl , CURLOPT_SSL_VERIFYPEER , false );
-		curl_setopt( $curl , CURLOPT_RETURNTRANSFER , 1 );
-		curl_setopt( $curl , CURLOPT_COOKIE, $strCookie ); 
-		curl_setopt( $curl , CURLOPT_POST , 1 );
-		curl_setopt( $curl , CURLOPT_POSTFIELDS , http_build_query( array(
-				'transid' => $transId,
-				'status' => $status,
-				'rkey' => $rkey,
-				'checksum' => $checksum,
-				'sellingcurrencyamount' => $sellingCurrencyAmount,
-				'accountingcurrencyamount' => $accountingCurrencyAmount
-			) ) );
-
-		$response = curl_exec( $curl );
-		$error = curl_error( $curl );
-		$errno = curl_errno( $curl );
-
-		curl_close($curl);
-
-		if ( empty( $error ) && $errno == 0 ) {
-			echo $response;
-		} else {
-			die(sprintf('Post error: [%d] %s', $errno, $error));
-		}*/
 ?>
 		<form name="f1" action="<?php echo $redirectUrl;?>">
 			<input type="hidden" name="transid" value="<?php echo $transId;?>">
