@@ -12,6 +12,8 @@ require_once(__DIR__."/bootstrap.php");
 <font size=4>
 
 <?php
+		print_r($_REQUEST); exit;
+
 		$key = \ResellerClubPagseguro\Config::RESELLERCLUB_KEY; //replace ur 32 bit secure key , Get your secure key from your Reseller Control panel
 
 		$redirectUrl = $_SESSION['redirecturl'];  // redirectUrl received from foundation
@@ -31,8 +33,6 @@ require_once(__DIR__."/bootstrap.php");
 		* And it has not been tampered with. The data has not been changed since it can * easily be done with HTTP request.
 		*
 		**/
-		print_r($_SESSION); exit;
-
 		srand((double)microtime()*1000000);
 		$rkey = rand();
 

@@ -105,7 +105,7 @@ class Payment
 
 	public static function isSuccessTransaction()
 	{
-		return isset($_GET['transaction_id']) ? true : false;
+		return isset($_GET['transaction_id']) && !empty($_GET['transaction_id']) ? true : false;
 	}
 
 	public static function getTransactionId()
