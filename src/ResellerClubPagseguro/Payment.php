@@ -105,11 +105,12 @@ class Payment
 
 	public static function isSuccessTransaction()
 	{
-		return isset($_GET['transaction_id']) ? true : false;
+		$transactionId = self::getTransactionId(); 
+		return !is_null($transactionId) ? true : false;
 	}
 
 	public static function getTransactionId()
 	{
-		return isset($_GET['transaction_id']) ? $_GET['transaction_id'] : null;
+		return isset($_REQUEST['transaction_id']) ? $_REQUEST['transaction_id'] : null;
 	}
 }
